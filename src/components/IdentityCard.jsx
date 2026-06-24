@@ -83,7 +83,7 @@ export default function IdentityCard() {
           <div className="relative w-full h-44 md:h-52 overflow-hidden">
             {/* Replace /profile.jpg with your actual image path */}
             <img 
-              src="/PFP.jpg" 
+              src="/prof.jpg" 
               alt="Shazil - Full Stack Developer"
               className="w-full h-full object-cover object-top"
             />
