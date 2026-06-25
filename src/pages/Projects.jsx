@@ -44,7 +44,7 @@ export default function Projects() {
         number="05"
         title="Job Finder"
         subtitle="Flutter Mobile App for Job Searching & Recruitment"
-        image="jobfinder.jpg"
+        image="jobfinder.jpeg"
         tech={["Flutter", "Dart"]}
         github="https://github.com/MuhammadShazil7/Job_finder"
       />
@@ -53,7 +53,7 @@ export default function Projects() {
         number="06"
         title="BooksBound"
         subtitle="Book Discovery & Reading App for Book Lovers"
-        image="booksbound.jpg"
+        image="booksbound.jpeg"
         tech={["Flutter", "Dart"]}
         github="https://github.com/MuhammadShazil7/BooksBound"
       />

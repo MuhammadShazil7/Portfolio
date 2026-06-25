@@ -71,7 +71,7 @@ export default function About() {
   const personalInfo = [
     { icon: FiUser, label: "Name", value: "Muhammad Shazil" },
     { icon: FiMapPin, label: "Location", value: "Karachi, Pakistan" },
-    { icon: FiMail, label: "Email", value: "shazil@example.com" },
+    { icon: FiMail, label: "Email", value: "shazilm239@gmail.com" },
     { icon: FiBriefcase, label: "Experience", value: "2+ Years" },
     { icon: FiTarget, label: "Focus", value: "Full Stack Development" },
     { icon: FiTrendingUp, label: "Specialty", value: "MERN & ASP.NET" },
