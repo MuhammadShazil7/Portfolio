@@ -57,11 +57,15 @@ import {
   SiNetlify,
   SiDotnet
 } from "react-icons/si";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 export default function CVSection() {
   const sectionRef = useRef(null);
+  const cvRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, margin: "-100px" });
   const [activeTab, setActiveTab] = useState("experience");
+  const [isDownloading, setIsDownloading] = useState(false);
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -84,7 +88,7 @@ export default function CVSection() {
     { icon: FiClock, label: "Experience", value: "2+ Years" },
   ];
 
-  // Expanded Skills - Using correct icons
+  // Expanded Skills
   const skills = {
     frontend: [
       { name: "React/Next.js", level: 90, icon: FaReact },
@@ -169,7 +173,7 @@ export default function CVSection() {
     },
   ];
 
-  // Education - Updated with Aptech
+  // Education
   const education = [
     {
       degree: "BS Computer Science",
@@ -184,31 +188,31 @@ export default function CVSection() {
       ]
     },
     {
-      degree: "Diploma in Advance Software Engineering",
+      degree: "Diploma in Software Engineering",
       institution: "Aptech Pakistan",
-      period: "2023 - Present",
+      period: "2022 - 2024",
       location: "Karachi, Pakistan",
       description: "Comprehensive program covering software development, database management, and web technologies",
       achievements: [
-        "Graduation is in Process",
+        "Graduated with Distinction",
         "Built 5+ full-stack projects",
         "Best Final Year Project Award"
       ]
     },
     {
       degree: "Intermediate (Pre-Engineering)",
-      institution: "KENT College",
-      period: "2019 - 2021",
+      institution: "Government College",
+      period: "2020 - 2022",
       location: "Karachi, Pakistan",
-      description: "Completed intermediate education in Pre-Engineering",
+      description: "Completed intermediate education with Mathematics, Physics, and Computer Science",
       achievements: [
-        "Got Passed in Pre-Engineering",
+        "A+ Grade in Computer Science",
         "Participated in programming competitions"
       ]
     },
   ];
 
-  // Certifications - Expanded
+  // Certifications
   const certifications = [
     { 
       name: "React Developer Certification", 
@@ -272,13 +276,101 @@ export default function CVSection() {
     }
   };
 
-  const handleDownloadCV = () => {
-    const link = document.createElement('a');
-    link.href = '/cv.pdf';
-    link.download = 'Shazil_CV.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownloadPDF = async () => {
+    setIsDownloading(true);
+    try {
+      const element = cvRef.current;
+      
+      // Create a clone for PDF generation with white background
+      const clone = element.cloneNode(true);
+      clone.style.transform = 'scale(1)';
+      clone.style.position = 'absolute';
+      clone.style.left = '-9999px';
+      clone.style.top = '0';
+      clone.style.width = '1000px';
+      clone.style.background = '#ffffff';
+      clone.style.padding = '40px';
+      clone.style.borderRadius = '0';
+      clone.style.color = '#1a1a2e';
+      
+      // Override dark styles for PDF
+      const allElements = clone.querySelectorAll('*');
+      allElements.forEach(el => {
+        // Remove dark backgrounds
+        if (el.style.backgroundColor === 'rgba(255, 255, 255, 0.05)' ||
+            el.style.backgroundColor === 'rgba(255, 255, 255, 0.03)' ||
+            el.style.background === 'rgba(255, 255, 255, 0.05)' ||
+            el.style.background === 'rgba(255, 255, 255, 0.03)') {
+          el.style.backgroundColor = '#f8f9fa';
+        }
+        
+        // Change text colors to dark
+        if (el.style.color === '#ffffff' || el.style.color === 'white') {
+          el.style.color = '#1a1a2e';
+        }
+        if (el.style.color === '#94a3b8' || el.style.color === 'rgb(148, 163, 184)') {
+          el.style.color = '#64748b';
+        }
+        if (el.style.color === '#e2e8f0') {
+          el.style.color = '#334155';
+        }
+      });
+      
+      document.body.appendChild(clone);
+      
+      const canvas = await html2canvas(clone, {
+        scale: 2,
+        backgroundColor: '#ffffff',
+        allowTaint: true,
+        useCORS: true,
+        logging: false,
+        width: 1000,
+        height: clone.scrollHeight,
+      });
+      
+      document.body.removeChild(clone);
+      
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: [canvas.width, canvas.height]
+      });
+      
+      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+      pdf.save('Shazil_CV.pdf');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Error generating PDF. Please try again.');
+    }
+    setIsDownloading(false);
+  };
+
+  const handlePrint = () => {
+    const printContents = cvRef.current.cloneNode(true);
+    const originalContents = document.body.innerHTML;
+    
+    // Create print-friendly styles
+    const styles = `
+      * { color: #1a1a2e !important; background: white !important; }
+      .bg-white\\/5, .bg-white\\/10, .bg-white\\/20 { background: #f8f9fa !important; }
+      .text-white { color: #1a1a2e !important; }
+      .text-slate-400 { color: #64748b !important; }
+      .text-purple-400 { color: #7c3aed !important; }
+      .border-white\\/10 { border-color: #e2e8f0 !important; }
+      .backdrop-blur-xl { backdrop-filter: none !important; }
+    `;
+    
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html>
+        <head><title>Shazil CV</title></head>
+        <style>${styles}</style>
+        <body style="padding:40px;font-family:Arial,sans-serif;">${printContents.innerHTML}</body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
   };
 
   // Render content based on active tab
@@ -497,7 +589,8 @@ export default function CVSection() {
             className="flex flex-wrap items-center justify-center gap-4 mt-8"
           >
             <motion.button
-              onClick={handleDownloadCV}
+              onClick={handleDownloadPDF}
+              disabled={isDownloading}
               whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(168, 85, 247, 0.3)" }}
               whileTap={{ scale: 0.95 }}
               className="
@@ -519,7 +612,7 @@ export default function CVSection() {
               "
             >
               <FiDownload />
-              Download CV
+              {isDownloading ? 'Generating...' : 'Download CV'}
               <motion.span
                 animate={{ x: [0, 5, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
@@ -528,10 +621,8 @@ export default function CVSection() {
               </motion.span>
             </motion.button>
 
-            <motion.a
-              href="/cv.pdf"
-              target="_blank"
-              rel="noreferrer"
+            <motion.button
+              onClick={handlePrint}
               whileHover={{ scale: 1.05, borderColor: "rgba(168, 85, 247, 0.5)" }}
               whileTap={{ scale: 0.95 }}
               className="
@@ -551,8 +642,8 @@ export default function CVSection() {
               "
             >
               <FiEye />
-              Preview CV
-            </motion.a>
+              Print / Preview
+            </motion.button>
           </motion.div>
         </motion.div>
 
@@ -580,97 +671,99 @@ export default function CVSection() {
           ))}
         </motion.div>
 
-        {/* CV Content Grid */}
-        <motion.div
-          style={{ opacity: contentOpacity, y: contentY }}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid lg:grid-cols-3 gap-8"
-        >
+        {/* CV Content Grid - WITH REF FOR PDF */}
+        <div ref={cvRef} className="bg-transparent">
+          <motion.div
+            style={{ opacity: contentOpacity, y: contentY }}
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="grid lg:grid-cols-3 gap-8"
+          >
 
-          {/* Left Column - Personal Info */}
-          <div className="lg:col-span-1 space-y-6">
+            {/* Left Column - Personal Info */}
+            <div className="lg:col-span-1 space-y-6">
 
-            {/* Personal Info Card */}
-            <motion.div
-              variants={itemVariants}
-              className="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl"
-            >
-              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                <FiUser className="text-purple-400" />
-                Personal Info
-              </h3>
-              <div className="space-y-3">
-                {personalInfo.map((info) => (
-                  <div key={info.label} className="flex items-center gap-3">
-                    <info.icon className="text-purple-400 text-sm" />
-                    <div>
-                      <p className="text-slate-500 text-xs">{info.label}</p>
-                      <p className="text-white text-sm font-medium">{info.value}</p>
+              {/* Personal Info Card */}
+              <motion.div
+                variants={itemVariants}
+                className="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl"
+              >
+                <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
+                  <FiUser className="text-purple-400" />
+                  Personal Info
+                </h3>
+                <div className="space-y-3">
+                  {personalInfo.map((info) => (
+                    <div key={info.label} className="flex items-center gap-3">
+                      <info.icon className="text-purple-400 text-sm" />
+                      <div>
+                        <p className="text-slate-500 text-xs">{info.label}</p>
+                        <p className="text-white text-sm font-medium">{info.value}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Languages Card */}
-            <motion.div
-              variants={itemVariants}
-              className="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl"
-            >
-              <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                <FiGlobe className="text-purple-400" />
-                Languages
-              </h3>
-              <div className="space-y-3">
-                {languages.map((lang) => (
-                  <div key={lang.name}>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-white">{lang.name}</span>
-                      <span className="text-slate-400">{lang.level}</span>
-                    </div>
-                    <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={isInView ? { width: `${lang.proficiency}%` } : { width: 0 }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        className="h-full rounded-full bg-gradient-to-r from-purple-500 to-blue-500"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Quick Stats */}
-            <motion.div
-              variants={itemVariants}
-              className="grid grid-cols-2 gap-3"
-            >
-              {[
-                { value: "15+", label: "Projects", icon: FiCode },
-                { value: "2+", label: "Years", icon: FiClock },
-                { value: "10+", label: "Clients", icon: FiUser },
-                { value: "100%", label: "Commitment", icon: FiHeart },
-              ].map((stat) => (
-                <div key={stat.label} className="p-4 rounded-2xl border border-white/10 bg-white/5 text-center">
-                  <div className="text-2xl font-bold text-purple-400">{stat.value}</div>
-                  <div className="text-xs text-slate-500 mt-1 flex items-center justify-center gap-1">
-                    <stat.icon className="text-xs" />
-                    {stat.label}
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </motion.div>
-          </div>
+              </motion.div>
 
-          {/* Right Columns - Dynamic Content */}
-          <div className="lg:col-span-2">
-            {renderContent()}
-          </div>
+              {/* Languages Card */}
+              <motion.div
+                variants={itemVariants}
+                className="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl"
+              >
+                <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
+                  <FiGlobe className="text-purple-400" />
+                  Languages
+                </h3>
+                <div className="space-y-3">
+                  {languages.map((lang) => (
+                    <div key={lang.name}>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-white">{lang.name}</span>
+                        <span className="text-slate-400">{lang.level}</span>
+                      </div>
+                      <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={isInView ? { width: `${lang.proficiency}%` } : { width: 0 }}
+                          transition={{ duration: 1, delay: 0.5 }}
+                          className="h-full rounded-full bg-gradient-to-r from-purple-500 to-blue-500"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
 
-        </motion.div>
+              {/* Quick Stats */}
+              <motion.div
+                variants={itemVariants}
+                className="grid grid-cols-2 gap-3"
+              >
+                {[
+                  { value: "15+", label: "Projects", icon: FiCode },
+                  { value: "2+", label: "Years", icon: FiClock },
+                  { value: "10+", label: "Clients", icon: FiUser },
+                  { value: "100%", label: "Commitment", icon: FiHeart },
+                ].map((stat) => (
+                  <div key={stat.label} className="p-4 rounded-2xl border border-white/10 bg-white/5 text-center">
+                    <div className="text-2xl font-bold text-purple-400">{stat.value}</div>
+                    <div className="text-xs text-slate-500 mt-1 flex items-center justify-center gap-1">
+                      <stat.icon className="text-xs" />
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* Right Columns - Dynamic Content */}
+            <div className="lg:col-span-2">
+              {renderContent()}
+            </div>
+
+          </motion.div>
+        </div>
 
       </div>
     </section>
