@@ -1,7 +1,7 @@
 // components/AdminCounter.jsx
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiEye, FiUsers, FiBarChart2, FiActivity, FiLock, FiUnlock } from "react-icons/fi";
+import { FiEye, FiUsers, FiActivity, FiLock } from "react-icons/fi";
 
 export default function AdminCounter() {
   const [isAdminMode, setIsAdminMode] = useState(false);
@@ -29,25 +29,22 @@ export default function AdminCounter() {
     if (savedToday === today && savedTodayVisitors) {
       setTodayVisitors(parseInt(savedTodayVisitors));
     } else {
-      // Reset for new day
       localStorage.setItem('todayDate', today);
       localStorage.setItem('todayVisitors', '0');
       setTodayVisitors(0);
     }
 
-    // ✅ Vercel-compatible admin check - works on both localhost and Vercel
+    // ✅ Check for admin unlock via URL
     const urlParams = new URLSearchParams(window.location.search);
     const adminParam = urlParams.get('admin');
     
-    // Check for admin unlock
     if (adminParam === 'shazil123') {
       localStorage.setItem('adminMode', 'true');
       setIsAdminMode(true);
-      // ✅ Clean URL without page reload (works on Vercel)
       window.history.replaceState({}, document.title, window.location.pathname);
     }
 
-    // ✅ Also check if coming from Vercel with hash
+    // ✅ Check via hash
     if (window.location.hash === '#admin') {
       localStorage.setItem('adminMode', 'true');
       setIsAdminMode(true);
@@ -60,13 +57,11 @@ export default function AdminCounter() {
     const hasVisited = sessionStorage.getItem('hasVisited');
     
     if (!hasVisited) {
-      // New visitor
       const currentCount = parseInt(localStorage.getItem('visitorCount') || '0');
       const newCount = currentCount + 1;
       localStorage.setItem('visitorCount', newCount.toString());
       setVisitorCount(newCount);
 
-      // Update today's visitors
       const today = new Date().toDateString();
       const savedToday = localStorage.getItem('todayDate');
       const todayVisitors = parseInt(localStorage.getItem('todayVisitors') || '0');
@@ -104,7 +99,7 @@ export default function AdminCounter() {
     }
   };
 
-  // Secret click counter to unlock admin mode
+  // Secret click counter - Hidden completely
   const [clickCount, setClickCount] = useState(0);
   const handleSecretClick = () => {
     setClickCount(prev => prev + 1);
@@ -114,21 +109,27 @@ export default function AdminCounter() {
     }
   };
 
-  // Only show counter if admin mode is enabled
+  // ✅ COMPLETELY HIDDEN from users - no eye icon, nothing visible
+  // Only admin mode shows the counter
   if (!isAdminMode) {
     return (
       <div 
         onClick={handleSecretClick}
-        className="fixed bottom-4 left-4 z-50 cursor-pointer opacity-0 hover:opacity-30 transition-opacity duration-300"
+        className="fixed bottom-4 left-4 z-50 cursor-pointer"
+        style={{ 
+          width: '0px', 
+          height: '0px', 
+          overflow: 'hidden',
+          opacity: 0,
+          pointerEvents: 'none' // Prevents any interaction
+        }}
       >
-        <div className="p-2 rounded-full bg-white/5 border border-white/10">
-          <FiEye className="text-white/20 text-sm" />
-        </div>
-        <div className="text-[8px] text-white/10 text-center mt-1">Click 5x</div>
+        {/* Completely hidden - users can't see or click */}
       </div>
     );
   }
 
+  // ✅ Only visible when admin mode is enabled (only you)
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

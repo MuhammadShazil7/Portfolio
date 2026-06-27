@@ -7,6 +7,7 @@ import CTA from "../components/CTA";
 import PageTransition from "../components/PageTransition";
 import ScrollToTop from "../components/ScrollToTop.jsx";
 import FloatingSocials from "../components/FloatingSocials";
+import AdminCounter from "../components/AdminCounter.jsx";
 
 export default function Home() {
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
@@ -171,6 +172,7 @@ export default function Home() {
               </motion.p>
             </div>
           </footer> */}
+          <AdminCounter/>
 
         </main>
       </PageTransition>
