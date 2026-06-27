@@ -1,16 +1,16 @@
+// components/CTA.jsx
 import { motion } from "framer-motion";
 import { FiArrowRight, FiMail, FiGithub, FiLinkedin } from "react-icons/fi";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom"; // ✅ Added React Router imports
 
 export default function CTA() {
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
 
   const handleContactClick = () => {
-    // Smooth scroll to contact section
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    // Navigate to contact page
+    navigate('/contact');
   };
 
   return (
@@ -138,13 +138,14 @@ export default function CTA() {
             </div>
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - FIXED */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
             className="flex flex-wrap justify-center gap-4 mt-10"
           >
+            {/* Contact Button - Using React Router */}
             <motion.button
               onClick={handleContactClick}
               onHoverStart={() => setIsHovered(true)}
@@ -165,15 +166,17 @@ export default function CTA() {
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.button>
 
-            <motion.a
-              href="#projects"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-2xl border border-white/10 hover:border-purple-400/50 hover:bg-white/5 transition-all duration-300 font-semibold flex items-center gap-2"
-            >
-              View My Work
-              <FiArrowRight className="group-hover:translate-x-1 transition" />
-            </motion.a>
+            {/* View My Work - Using Link */}
+            <Link to="/projects">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 rounded-2xl border border-white/10 hover:border-purple-400/50 hover:bg-white/5 transition-all duration-300 font-semibold flex items-center gap-2"
+              >
+                View My Work
+                <FiArrowRight className="group-hover:translate-x-1 transition" />
+              </motion.div>
+            </Link>
           </motion.div>
 
           {/* Social Links */}
