@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom"; 
 import { 
   FiCode, 
   FiAward, 
@@ -540,7 +541,7 @@ export default function About() {
           ))}
         </motion.div>
 
-        {/* CTA Button */}
+        {/* CTA Buttons - FIXED with Link component */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -553,72 +554,76 @@ export default function About() {
           }}
           className="mt-12 flex flex-wrap gap-4"
         >
-          <motion.a
-            href="/projects"
+          <motion.div
             whileHover={{
               scale: 1.05,
-              boxShadow: "0 0 40px rgba(168, 85, 247, 0.3)",
             }}
             whileTap={{ scale: 0.95 }}
-            className="
-              inline-flex
-              items-center
-              gap-3
-              px-8
-              py-4
-              rounded-full
-              bg-gradient-to-r
-              from-purple-600
-              to-blue-600
-              text-white
-              font-medium
-              transition-all
-              duration-300
-              shadow-lg
-              shadow-purple-500/20
-              group
-            "
           >
-            <span>View My Work</span>
-            <motion.span
-              animate={{
-                x: [0, 6, 0],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+            <Link
+              to="/projects"
+              className="
+                inline-flex
+                items-center
+                gap-3
+                px-8
+                py-4
+                rounded-full
+                bg-gradient-to-r
+                from-purple-600
+                to-blue-600
+                text-white
+                font-medium
+                transition-all
+                duration-300
+                shadow-lg
+                shadow-purple-500/20
+                group
+              "
             >
-              →
-            </motion.span>
-          </motion.a>
+              <span>View My Work</span>
+              <motion.span
+                animate={{
+                  x: [0, 6, 0],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                →
+              </motion.span>
+            </Link>
+          </motion.div>
 
-          <motion.a
-            href="/contact"
+          <motion.div
             whileHover={{
               scale: 1.05,
-              borderColor: "rgba(168, 85, 247, 0.5)",
             }}
             whileTap={{ scale: 0.95 }}
-            className="
-              inline-flex
-              items-center
-              gap-3
-              px-8
-              py-4
-              rounded-full
-              border
-              border-white/20
-              text-white
-              font-medium
-              transition-all
-              duration-300
-              hover:bg-white/5
-            "
           >
-            <span>Let's Connect</span>
-          </motion.a>
+            <Link
+              to="/contact"
+              className="
+                inline-flex
+                items-center
+                gap-3
+                px-8
+                py-4
+                rounded-full
+                border
+                border-white/20
+                text-white
+                font-medium
+                transition-all
+                duration-300
+                hover:bg-white/5
+              "
+            >
+              <span>Let's Connect</span>
+            </Link>
+          </motion.div>
         </motion.div>
 
       </div>
