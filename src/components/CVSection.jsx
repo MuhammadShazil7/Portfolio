@@ -178,7 +178,7 @@ export default function CVSection() {
     {
       degree: "BS Computer Science",
       institution: "Aptech Pakistan",
-      period: "2024 - Present",
+      period: "2025 - Present",
       location: "Karachi, Pakistan",
       description: "Pursuing Bachelor's in Computer Science with focus on Software Engineering, Web Development, and Data Science",
       achievements: [
@@ -188,25 +188,25 @@ export default function CVSection() {
       ]
     },
     {
-      degree: "Diploma in Software Engineering",
+      degree: "Diploma in Advance Software Engineering",
       institution: "Aptech Pakistan",
-      period: "2022 - 2024",
+      period: "2024 - Present",
       location: "Karachi, Pakistan",
-      description: "Comprehensive program covering software development, database management, and web technologies",
+      description: "Comprehensive program covering Advance software development, database management, and web technologies",
       achievements: [
-        "Graduated with Distinction",
+        "Soon Graduated with Distinction",
         "Built 5+ full-stack projects",
         "Best Final Year Project Award"
       ]
     },
     {
       degree: "Intermediate (Pre-Engineering)",
-      institution: "Government College",
-      period: "2020 - 2022",
+      institution: "KENT College",
+      period: "2019 - 2021",
       location: "Karachi, Pakistan",
-      description: "Completed intermediate education with Mathematics, Physics, and Computer Science",
+      description: "Completed intermediate education in Pre-Engineering",
       achievements: [
-        "A+ Grade in Computer Science",
+        "Got passed out in Pre-Engineering",
         "Participated in programming competitions"
       ]
     },
@@ -216,47 +216,48 @@ export default function CVSection() {
   const certifications = [
     { 
       name: "React Developer Certification", 
-      issuer: "Meta (Coursera)", 
-      year: "2023",
+      issuer: "Aptech Pakistan", 
+      year: "2025",
       icon: FaReact
     },
     { 
       name: "JavaScript Advanced", 
-      issuer: "FreeCodeCamp", 
-      year: "2023",
+      issuer: "Aptech Pakistan", 
+      year: "2024",
       icon: FiCode
     },
     { 
       name: "MongoDB Developer", 
-      issuer: "MongoDB University", 
-      year: "2023",
+      issuer: "Aptech Pakistan", 
+      year: "2025",
       icon: SiMongodb
     },
     { 
       name: "ASP.NET Core Web Development", 
-      issuer: "Microsoft Learn", 
-      year: "2023",
+      issuer: "Aptech Pakistan", 
+      year: "2024",
       icon: SiDotnet
     },
     { 
       name: "Laravel Fundamentals", 
-      issuer: "Laravel Academy", 
-      year: "2022",
+      issuer: "Aptech Pakistan", 
+      year: "2024",
       icon: FaLaravel
     },
     { 
       name: "Responsive Web Design", 
-      issuer: "FreeCodeCamp", 
-      year: "2022",
+      issuer: "Aptech Pakistan", 
+      year: "2023",
       icon: SiTailwindcss
     },
   ];
 
   // Languages
   const languages = [
-    { name: "English", level: "Professional Working", proficiency: 85 },
     { name: "Urdu", level: "Native", proficiency: 100 },
-    { name: "Sindhi", level: "Conversational", proficiency: 60 },
+    { name: "English", level: "Professional Working", proficiency: 85 },
+    { name: "Sindhi", level: "Conversational", proficiency: 50 },
+    { name: "Turkish", level: "Conversational", proficiency: 40 },
   ];
 
   const containerVariants = {
