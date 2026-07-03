@@ -206,7 +206,11 @@ export default function Hero() {
               <span className="text-blue-400 font-medium"> ASP.NET</span>, 
               <span className="text-green-400 font-medium"> Node.js</span> and 
               <span className="text-emerald-400 font-medium"> MongoDB</span>.
+              <span className="block text-sm text-slate-500 mt-1">
+                    — Powered by CHAI... ☕
+              </span>
             </motion.p>
+            
 
             {/* Buttons */}
             <motion.div
@@ -281,7 +285,7 @@ export default function Hero() {
               >
                 <Link to="/contact" className="flex items-center gap-2">
                   <FiSend className="group-hover:scale-110 transition-transform" />
-                  <span>Contact Me</span>
+                  <span>Say Hello</span>
                 </Link>
               </motion.button>
             </motion.div>

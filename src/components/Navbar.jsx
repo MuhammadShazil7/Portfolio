@@ -46,6 +46,7 @@ export default function Navbar() {
     { path: "/about", label: "About", icon: FiUser },
     { path: "/projects", label: "Projects", icon: FiCode },
     { path: "/cv", label: "CV", icon: FiFileText },
+    { path: "/blog", label: "Blog", icon: FiFileText },
     { path: "/contact", label: "Contact", icon: FiMail },
   ];
 

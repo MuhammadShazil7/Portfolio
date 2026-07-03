@@ -19,6 +19,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import CVSection from "./components/CVSection";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import Blog from "./pages/Blog";
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -51,6 +52,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/skills" element={<Skills />} />
             <Route path="/cv" element={<CVSection />} />
