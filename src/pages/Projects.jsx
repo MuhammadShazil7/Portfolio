@@ -75,6 +75,15 @@ export default function Projects() {
         tech={["HTML", "CSS", "JavaScript", "Bootstrap"]}
         github="#"
       />
+
+      <ProjectSection
+        number="09"
+        title="FreelancerHub-WorkSphere"
+        subtitle="Complete Freelancer & Client Platform with Real-time Messaging"
+        image="FRWS.png"
+        tech={["React", "Node.js", "Express.js", "MongoDB", "Socket.io"]}
+        github="https://github.com/MuhammadShazil7/FreelanceHub-WorkSphere"
+      />
     </>
   );
 }

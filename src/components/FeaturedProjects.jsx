@@ -12,7 +12,7 @@ const projects = [
     image: "/FOS.jpeg",
     stack: ["React", "Node.js", "Express", "MongoDB"],
     githubLink: "#",
-    featured: true,
+    featured: false,
     category: "Full Stack",
     details: {
       year: "2024",
@@ -134,6 +134,32 @@ const projects = [
       "Personalized Recommendations",
       "Reading Lists",
       "Book Reviews",
+    ],
+  },
+  {
+    number: "09",
+    title: "FreelancerHub-WorkSphere",
+    description:
+      "A complete platform connecting freelancers and clients. Features real-time messaging, project bidding, secure payments, and seamless collaboration.",
+    image: "/FRWS.png",
+    stack: ["React", "Node.js", "Express", "MongoDB", "Socket.io"],
+    githubLink: "https://github.com/MuhammadShazil7/FreelancerHub-WorkSphere",
+    featured: true,
+    category: "Full Stack",
+    details: {
+      year: "2024",
+      type: "Web Application",
+      status: "In Development",
+    },
+    features: [
+      "🔹 Freelancer & Client Profiles",
+      "🔹 Project Posting & Bidding System",
+      "💬 Real-time Messaging with Socket.io",
+      "💳 Secure Payment Integration",
+      "📊 Project Tracking & Analytics",
+      "⭐ Review & Rating System",
+      "📌 Job Recommendations",
+      "🎯 Portfolio Showcase"
     ],
   },
 ];
