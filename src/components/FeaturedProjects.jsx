@@ -153,6 +153,7 @@ const projects = [
     },
     features: [
       "🔹 Freelancer & Client Profiles",
+      "🔹 Admin Panel and Controlls",
       "🔹 Project Posting & Bidding System",
       "💬 Real-time Messaging with Socket.io",
       "💳 Secure Payment Integration",
