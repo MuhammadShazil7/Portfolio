@@ -143,7 +143,7 @@ const projects = [
       "A complete platform connecting freelancers and clients. Features real-time messaging, project bidding, secure payments, and seamless collaboration.",
     image: "/FRWS.png",
     stack: ["React", "Node.js", "Express", "MongoDB", "Socket.io"],
-    githubLink: "https://github.com/MuhammadShazil7/FreelancerHub-WorkSphere",
+    githubLink: "https://github.com/MuhammadShazil7/FreelanceHub-WorkSphere",
     featured: true,
     category: "Full Stack",
     details: {
