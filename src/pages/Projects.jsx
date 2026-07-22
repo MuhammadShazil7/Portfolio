@@ -48,9 +48,17 @@ export default function Projects() {
         tech={["Flutter", "Dart"]}
         github="https://github.com/MuhammadShazil7/Job_finder"
       />
-
       <ProjectSection
         number="06"
+        title="FitFlow"
+        subtitle="Smart Fitness & Workout Tracking Platform"
+        image="FF.png"
+        tech={["React", "Node.js", "Express.js", "MongoDB"]}
+        github="https://github.com/MuhammadShazil7/fitflow"
+      />
+
+      <ProjectSection
+        number="07"
         title="BooksBound"
         subtitle="Book Discovery & Reading App for Book Lovers"
         image="booksbound.jpeg"
@@ -59,7 +67,7 @@ export default function Projects() {
       />
 
       <ProjectSection
-        number="07"
+        number="08"
         title="Expense Tracker"
         subtitle="Track Every Rupee Efficiently"
         image="EXP.png"
@@ -68,7 +76,7 @@ export default function Projects() {
       />
 
       <ProjectSection
-        number="08"
+        number="09"
         title="Jewellery Store"
         subtitle="Luxury Jewellery E-Commerce Experience"
         image="JRY.jpg"
@@ -77,13 +85,16 @@ export default function Projects() {
       />
 
       <ProjectSection
-        number="09"
+        number="10"
         title="FreelancerHub-WorkSphere"
         subtitle="Complete Freelancer & Client Platform with Real-time Messaging"
         image="FRWS.png"
         tech={["React", "Node.js", "Express.js", "MongoDB", "Socket.io"]}
         github="https://github.com/MuhammadShazil7/FreelanceHub-WorkSphere"
       />
+
+      // pages/Projects.jsx
+
     </>
   );
 }

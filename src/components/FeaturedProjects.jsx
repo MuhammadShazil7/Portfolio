@@ -78,7 +78,7 @@ const projects = [
     image: "/bookly.jpg", // Add this image to public folder
     stack: ["PHP", "MySQL", "HTML", "CSS"],
     githubLink: "https://github.com/MuhammadShazil7/Bookly",
-    featured: true,
+    featured: false,
     category: "Web App",
     details: {
       year: "2024",
@@ -163,6 +163,31 @@ const projects = [
       "🎯 Portfolio Showcase"
     ],
   },
+
+  {
+  number: "10",
+  title: "FitFlow",
+  description:
+    "A smart fitness tracking platform that helps users track workouts, set goals, and monitor progress with real-time analytics.",
+  image: "/FF.png",
+  stack: ["React", "Node.js", "Express", "MongoDB"],
+  githubLink: "https://github.com/MuhammadShazil7/fitflow",
+  featured: true,
+  category: "Full Stack",
+  details: {
+    year: "2024",
+    type: "Web Application",
+    status: "In Development",
+  },
+  features: [
+    "🏋️ Workout Tracking & Logging",
+    "📊 Real-time Progress Analytics",
+    "🎯 Custom Goal Setting",
+    "📅 Workout Schedule & Plans",
+    "📈 Visual Progress Charts",
+    "🏆 Achievement Badges",
+  ],
+}
 ];
 
 // Show only 3 featured projects on home page
