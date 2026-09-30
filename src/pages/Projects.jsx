@@ -93,7 +93,7 @@ export default function Projects() {
         github="https://github.com/MuhammadShazil7/FreelanceHub-WorkSphere"
       />
 
-      // pages/Projects.jsx
+      
 
     </>
   );
