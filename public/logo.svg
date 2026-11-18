@@ -1,0 +1,29 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 200 210"
+     fill="none">
+
+  <defs>
+    <mask id="shield">
+      <rect width="200" height="210" fill="white"/>
+      <path
+        d="M145 57 L100 40 L55 57
+           V77 C55 96 72 106 100 113
+           C128 120 145 130 145 146
+           L100 171 L55 146 V125"
+        fill="none"
+        stroke="black"
+        stroke-width="17"
+        stroke-linejoin="miter"/>
+    </mask>
+  </defs>
+
+  <path
+    d="M100 9 L181 36
+       V91 C181 145 146 179 100 202
+       C54 179 19 145 19 91
+       V36 Z"
+    fill="#8B5CF6"
+    mask="url(#shield)"/>
+
+</svg>
